@@ -29,10 +29,16 @@ form {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  width: 150px;
+  width: 170px;
   height: 200px;
 }
 
 .home-header {
   margin-top: 90px;
+}
+
+.home-links {
+  display: flex;
+  justify-content: space-between;
+  width: 25%;
 }

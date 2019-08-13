@@ -38,7 +38,7 @@ export default class LoginPage extends Component {
                     <input type='email' name='email' id='email'></input>
                     <label htmlFor='password'>Password</label>
                     <input type='password' name='password' id='password'></input>
-                    <input type='checkbox' name='remember' id='remember'></input>
+                    <input type='checkbox' name='remember' id='remember' style={{alignSelf: 'flex-start'}}></input>
                     <label htmlFor='remember'>Remember me</label>
                     <button type='submit'>Log in</button>
                 </form>
