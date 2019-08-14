@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter, Link } from 'react-router-dom'
 
 import './index.css';
 import App from './App';
@@ -8,7 +8,7 @@ import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
     <BrowserRouter>
-        <h1 className='header'>Adnat</h1>
+        <h1 className='header'><Link to='/home'>Adnat</Link></h1>
         <App />
     </BrowserRouter>,
     document.getElementById('root')

@@ -43,7 +43,6 @@ export default class LoginPage extends Component {
                     <button type='submit'>Log in</button>
                 </form>
                 <Link to='/new'>Sign up</Link>
-                <Link to='/forgot'>Forgot your password?</Link>
             </div>
         )
     }

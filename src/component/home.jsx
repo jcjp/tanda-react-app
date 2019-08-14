@@ -15,15 +15,17 @@ export default class HomePage extends Component {
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleLogout = this.handleLogout.bind(this)
         this.handleLeave = this.handleLeave.bind(this)
+        this.handleJoin = this.handleJoin.bind(this)
     }
 
     componentDidMount() {
-        const state = this.props.location.state
 
-        if (state) {
-            this.setState({ sessionId: state.sessionId })
+        if (this.props.location.state) {
+            const { sessionId } = this.props.location.state
 
-            const headers = { 'Authorization': state.sessionId }
+            this.setState({ sessionId })
+
+            const headers = { 'Authorization': sessionId }
 
             axios
                 .get('http://localhost:3000/users/me', { headers })
@@ -40,6 +42,12 @@ export default class HomePage extends Component {
             })
         }
     }
+
+    /* componentDidUpdate(prevProps, prevState) {
+        if (!prevProps.location.state.organisations) {
+            this.props.history.push({ pathname: '/home' })
+        }
+    } */
 
     handleSubmit(e) {
         e.preventDefault();
@@ -72,11 +80,18 @@ export default class HomePage extends Component {
 
     handleLeave() {
         axios
-            .post('http://localhost:3000/organisations/leave', { headers: { 'Authorization': this.state.sessionId } })
+            .post('http://localhost:3000/organisations/leave', null, { headers: { 'Authorization': this.state.sessionId } })
+            .then(_ => this.forceUpdate())
+    }
+
+    handleJoin(organisationId) {
+        axios
+            .post('http://localhost:3000/organisations/join', { organisationId }, { headers: { 'Authorization': this.state.sessionId } })
+            .then(_ => this.forceUpdate())
     }
 
     render() {
-        const { organisations, user } = this.state
+        const { organisations, user, sessionId } = this.state
         const organisation = organisations.find(organisation => organisation.id === user.organisationId)
 
         return (
@@ -96,7 +111,7 @@ export default class HomePage extends Component {
                             <h2>Organisations</h2>
                             <ul>
                                 {organisations.length > 0 && organisations.map((organisation, index) =>
-                                    <li key={index}>{organisation.name} <Link to={{pathname: '/edit', state: { organisation, user }}} >Edit</Link> <Link to='#'>Join</Link></li>
+                                    <li key={index}>{organisation.name} <Link to={{ pathname: '/edit', state: { organisation, user, sessionId } }} >Edit</Link> <Link to='/home' onClick={() => this.handleJoin(organisation.id)}>Join</Link></li>
                                 )}
                             </ul>
                             <h2>Create organisations</h2>
@@ -107,13 +122,15 @@ export default class HomePage extends Component {
                                 <input type='rate' name='rate' id='rate'></input>
                                 <button type='submit'>Create and join</button>
                             </form>
+                            <Link to={{ pathname: '/forgot', state: { user, sessionId } }}>Forgot your password?</Link>
                         </React.Fragment> :
                         <React.Fragment>
                             <h2>{organisation ? organisation.name : ''}</h2>
                             <div className='home-links'>
-                                <Link to='#'>View Shifts</Link>
-                                <Link to='#'>Edit</Link>
-                                <Link to='#' onClick={this.handleLeave}>Leave</Link>
+                                <Link to='/shifts'>View Shifts</Link>
+                                <Link to={{ pathname: '/edit', state: { organisation, user, sessionId } }} >Edit</Link>
+                                <Link to='/home' onClick={this.handleLeave}>Leave</Link>
+                                <Link to={{ pathname: '/forgot', state: { user, sessionId } }}>Forgot your password?</Link>
                             </div>
                         </React.Fragment>
                 }

@@ -1,5 +1,21 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## This project aims to perform the following operations:
+
+- [x] Enable login to register user
+- [x] Enable sign up to unregistered user
+- [x] Reset password for registered user
+- [x] Prompt a new registerd user to:
+    - [x] Join an organisation OR
+    - [x] Create a new organisation
+- [x] Registered user should be able to edit all organisation information (name and hourly rates)
+- [] A user who joined an organisation may be able to:
+    - [] View shifts of joined organisation
+    - [x] Edit current organisation
+    - [x] Leave current organisation
+        - [x] After leaving state should be reset for the user
+- [] Shift page should show all shiffts that belongs to the user, fellow employees at their organisation
+
 ## Available Scripts
 
 In the project directory, you can run:
