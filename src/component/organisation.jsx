@@ -66,7 +66,7 @@ export default class OrganisationPage extends Component {
                     <input type='text' name='rate' id='rate' defaultValue={organisation ? organisation.hourlyRate : ''}/> per hour
                     <button>Update</button>
                 </form>
-                <Link to='#' style={{ marginTop: '0.5%' }}>Delete</Link>
+                {/* <Link to='#' style={{ marginTop: '0.5%' }}>Delete</Link> */}
             </div>
         )
     }
