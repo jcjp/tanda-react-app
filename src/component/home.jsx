@@ -43,12 +43,6 @@ export default class HomePage extends Component {
         }
     }
 
-    /* componentDidUpdate(prevProps, prevState) {
-        if (!prevProps.location.state.organisations) {
-            this.props.history.push({ pathname: '/home' })
-        }
-    } */
-
     handleSubmit(e) {
         e.preventDefault();
 
@@ -56,7 +50,6 @@ export default class HomePage extends Component {
             .post('http://localhost:3000/organisations/create_join',
                 { name: e.target.name.value, hourlyRate: e.target.rate.value },
                 { headers: { 'Authorization': this.state.sessionId } })
-            .then(response => console.log(response))
 
     }
 
@@ -81,13 +74,11 @@ export default class HomePage extends Component {
     handleLeave() {
         axios
             .post('http://localhost:3000/organisations/leave', null, { headers: { 'Authorization': this.state.sessionId } })
-            .then(_ => this.forceUpdate())
     }
 
     handleJoin(organisationId) {
         axios
             .post('http://localhost:3000/organisations/join', { organisationId }, { headers: { 'Authorization': this.state.sessionId } })
-            .then(_ => this.forceUpdate())
     }
 
     render() {
@@ -95,19 +86,19 @@ export default class HomePage extends Component {
         const organisation = organisations.find(organisation => organisation.id === user.organisationId)
 
         return (
-            <div className='container'>
-                <p className='home-header'>Logged in as {user ? user.name : ''} <Link to='#' onClick={this.handleLogout}>Log Out</Link>
+            <div className='container' style={{ height: 'auto' }}>
+                <p>Logged in as {user ? user.name : ''} <Link to='#' onClick={this.handleLogout}>Log Out</Link>
                     {
                         user && !user.organisationId ?
-                            <React.Fragment>
+                            <div>
                                 <br /><br />You aren't a member of any organizations.
                                 <br />Join an existing one or create a new one.
-                            </React.Fragment> : ''
+                            </div> : ''
                     }
                 </p>
                 {
                     user && !user.organisationId ?
-                        <React.Fragment>
+                        <div>
                             <h2>Organisations</h2>
                             <ul>
                                 {organisations.length > 0 && organisations.map((organisation, index) =>
@@ -122,17 +113,17 @@ export default class HomePage extends Component {
                                 <input type='rate' name='rate' id='rate'></input>
                                 <button type='submit'>Create and join</button>
                             </form>
-                            <Link to={{ pathname: '/forgot', state: { user, sessionId } }}>Forgot your password?</Link>
-                        </React.Fragment> :
-                        <React.Fragment>
+                            <Link to={{ pathname: '/forgot', state: { user, sessionId } }}>Change password</Link>
+                        </div> :
+                        <div>
                             <h2>{organisation ? organisation.name : ''}</h2>
                             <div className='home-links'>
-                                <Link to='/shifts'>View Shifts</Link>
+                                <Link to={{ pathname: '/shifts', state: { organisation, user, sessionId } }}>View Shifts</Link>
                                 <Link to={{ pathname: '/edit', state: { organisation, user, sessionId } }} >Edit</Link>
                                 <Link to='/home' onClick={this.handleLeave}>Leave</Link>
-                                <Link to={{ pathname: '/forgot', state: { user, sessionId } }}>Forgot your password?</Link>
+                                <Link to={{ pathname: '/forgot', state: { user, sessionId } }}>Change password</Link>
                             </div>
-                        </React.Fragment>
+                        </div>
                 }
             </div>
         )

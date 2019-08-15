@@ -28,21 +28,21 @@ export default function SignupPage() {
             })
     }
 
-    return(
+    return (
         <div className='container'>
             <h3>Sign up</h3>
             <form className='form-signup' onSubmit={handleSubmit}>
                 <label htmlFor=''>Name</label>
-                <input type='text' name='name' id='name'/>
+                <input type='text' name='name' id='name' />
                 <label htmlFor='email'>Email</label>
-                <input type='text' name='email' id='email'/>
+                <input type='text' name='email' id='email' />
                 <label htmlFor='password'>Password<br /><em>(6 characters minimum)</em></label>
-                <input type='password' name='password' id='password'/>
+                <input type='password' name='password' id='password' />
                 <label htmlFor='confirm'>Password Confirmation</label>
-                <input type='password' name='confirm' id='confirm'/>
+                <input type='password' name='confirm' id='confirm' />
                 <button>Sign up</button>
             </form>
-            <Link to='/'>Log in</Link>
+            <Link to='/' style={{ marginTop: '0.5%' }}>Log in</Link>
         </div>
     )
 }

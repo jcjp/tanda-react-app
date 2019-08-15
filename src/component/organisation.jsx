@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 
-export default class OrganisationComponent extends Component {
+export default class OrganisationPage extends Component {
     constructor(props) {
         super(props)
 
@@ -54,6 +54,7 @@ export default class OrganisationComponent extends Component {
 
     render() {
         const { organisation, user } = this.props.location.state
+
         return (
             <div className='container'>
                 <p className='home-header'>Logged in as {user ? user.name : ''} <Link to='/'>Log Out</Link></p>
@@ -63,9 +64,9 @@ export default class OrganisationComponent extends Component {
                     <input type='text' name='name' id='name' defaultValue={organisation ? organisation.name : ''}/>
                     <label htmlFor='rate'>Hourly Rate: $</label>
                     <input type='text' name='rate' id='rate' defaultValue={organisation ? organisation.hourlyRate : ''}/> per hour
-                    <button>update</button>
+                    <button>Update</button>
                 </form>
-                <Link to='#'>Delete</Link>
+                <Link to='#' style={{ marginTop: '0.5%' }}>Delete</Link>
             </div>
         )
     }

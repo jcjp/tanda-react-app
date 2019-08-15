@@ -9,12 +9,12 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
     - [x] Join an organisation OR
     - [x] Create a new organisation
 - [x] Registered user should be able to edit all organisation information (name and hourly rates)
-- [] A user who joined an organisation may be able to:
-    - [] View shifts of joined organisation
+- [x] A user who joined an organisation may be able to:
+    - [x] View shifts of joined organisation
     - [x] Edit current organisation
     - [x] Leave current organisation
         - [x] After leaving state should be reset for the user
-- [] Shift page should show all shiffts that belongs to the user, fellow employees at their organisation
+- [x] Shift page should show all shiffts that belongs to the user, fellow employees at their organisation
 
 ## Available Scripts
 
